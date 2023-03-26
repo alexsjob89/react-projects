@@ -9,7 +9,12 @@ function Footer({ length }) {
         {length} List {length === 1 ? "Item" : "Items"}
       </p>
 
-      <p style={{ fontSize: "10px", marginTop: "20px", marginLeft: "20px" }}>Copyright &copy; {today.getFullYear()}</p>
+      <p style={{
+        fontSize: "10px",
+        marginTop: "20px",
+        marginLeft: "20px" }}>
+
+        Copyright &copy; {today.getFullYear()}</p>
     </footer>
   );
 }

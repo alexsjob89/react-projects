@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect,useState} from "react";
 import AddItem from "./AddItem";
 import Content from "./Content";
 import Footer from "./Footer";
@@ -7,17 +7,30 @@ import "./index.css";
 import SearchItem from "./SearchItem";
 
 function App() {
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem("shoppinglist")));
+  const API_URL = 'http://localhost:8000/items';
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+   const fetchItems = async () => {
+    try {
+      const response = await fetch(API_URL)
+      const listItems = await response.json();
+      console.log(listItems);
+      setItems(listItems);
+    } catch (err) {
+      console.log(err.stack)
+    }
+   }
+
+   (async () => await fetchItems())();
+  }, [])
 
   const [
     newItem,
     setNewItem] = useState("")
   const [search, setSearch] = useState("")
 
-  const setAndSaveItems = (newItems) => {
-    setItems(newItems);
-    localStorage.setItem("shoppinglist", JSON.stringify(newItems));
-  }
+
 
 
 
@@ -25,17 +38,26 @@ function App() {
      const id =items.length ? items[items.length -1].id + 1 : 1;
      const myNewItem = {id, checked: false, item}
      const listItems = [...items, myNewItem]
-     setAndSaveItems(listItems)
+     setItems(listItems)
   }
 
   const handleCheck = (id) => {
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
-    setAndSaveItems(listItems)
+    setItems(listItems)
+
+    const myItem = listItems.filter((item) => item.id === id)
+    const updateOptions = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({checked: myItem[0].checked})
+    };
   };
 
   const handleDelete = (id) => {
     const listItems = items.filter((item) => item.id !== id);
-    setAndSaveItems(listItems)
+    setItems(listItems)
   };
 
   const handleSubmit = (e) => {

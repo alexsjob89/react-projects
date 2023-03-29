@@ -1,18 +1,34 @@
 {
-    "items": [{
-            "id": 1,
-            "checked": false,
-            "item": "Almonds, Unsalted, in the blue bag"
-        },
-        {
-            "id": 2,
-            "checked": false,
-            "item": "Pizza"
-        },
-        {
-            "id": 3,
-            "checked": false,
-            "item": "Bread"
-        }
-    ]
+  "items": [
+    {
+      "id": 1,
+      "checked": false,
+      "item": "banna "
+    },
+    {
+      "id": 2,
+      "checked": false,
+      "item": "kiwi"
+    },
+    {
+      "id": 3,
+      "checked": false,
+      "item": "apples"
+    },
+    {
+      "id": 4,
+      "checked": false,
+      "item": "oranges"
+    },
+    {
+      "id": 5,
+      "checked": false,
+      "item": "pear"
+    },
+    {
+      "id": 7,
+      "checked": false,
+      "item": "greps"
+    }
+  ]
 }
